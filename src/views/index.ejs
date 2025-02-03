@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Integraion</title>
+</head>
+
+<body>
+    <h1>Razorpay Integration</h1>
+    <p>Welcome to Razorpay Integration</p>
+    <button id="rzp-button1">Pay with Razorpay</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById("rzp-button").addEventListener("click", () => {
+            axios.post("/create/orderId").then((response) => {
+                const { orderId, amount, keyId, currency } = response.data;
+                const option = {
+                    key: keyId,
+                    amount,
+                    currency,
+                    name: "Pranjal Jaiswal",
+                    description: "Test payment",
+                    handle: function (response) {
+                        axios.post("/payment_verify", {
+                            order: response.orderId,
+                            paymentId: response.paymentId,
+                            signature: response.signature,
+                        }).then(() => {
+                            console.log("payment sucessfully")
+                        }).catch((err) => {
+                            console.log(er)
+                        })
+                    },
+                    prefill: {
+                        name: "Pranjal Jaiswal",
+                        email: "pranjal@example.com",
+                    }
+                }
+                const razp1 = new Razorpay(option)
+                razp1.open()
+            }).catch((err) => {
+                console.log(err)
+            });
+        })
+    </script>
+</body>
+
+</html>
