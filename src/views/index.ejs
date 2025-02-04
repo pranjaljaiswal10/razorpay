@@ -24,10 +24,10 @@
                     name: "Pranjal Jaiswal",
                     description: "Test payment",
                     handle: function (response) {
-                        axios.post("/payment_verify", {
-                            order: response.orderId,
-                            paymentId: response.paymentId,
-                            signature: response.signature,
+                        axios.post("/payment/verify", {
+                            order: response.razorpay_order_id,
+                            paymentId: response.razorpay_order_id,
+                            signature: response.razorpay_signature,
                         }).then(() => {
                             console.log("payment sucessfully")
                         }).catch((err) => {

@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./src/db/index.js";
+import connectDB from "./db/index.js";
+import { paymentRouter } from "./routes/payment.route.js";
 
 dotenv.config({
   path: "./.env",
@@ -12,6 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extendend: true }));
 app.set("view engine", "ejs");
 app.set("view", "/src/views");
+app.use("/",paymentRouter)
+
 
 const port = process.env.PORT || 4000;
 

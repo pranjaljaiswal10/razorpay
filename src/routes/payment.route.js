@@ -1,12 +1,14 @@
 import express from "express";
 import {
   createOrderId,
-  paymentWebook,
+  // paymentWebook,
   verifyPayment,
-} from "../controllers/payment.controller";
+} from "../controllers/payment.controller.js";
 
-const router = express.Router();
+const paymentRouter = express.Router();
 
-router.post("/payment/create", createOrderId);
-router.post("/payment/webhook", paymentWebook);
-router.post("/payment/verify", verifyPayment);
+paymentRouter.post("/payment/create", createOrderId);
+// router.post("/payment/webhook", paymentWebook);
+paymentRouter.post("/payment/verify", verifyPayment);
+
+export {paymentRouter}
