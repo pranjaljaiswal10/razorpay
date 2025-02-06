@@ -14,8 +14,8 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.getElementById("rzp-button").addEventListener("click", () => {
-            axios.post("/create/orderId").then((response) => {
+        document.getElementById("rzp-button1").addEventListener("click", (e) => {
+            axios.post("/payment/create").then((response) => {
                 const { orderId, amount, keyId, currency } = response.data;
                 const option = {
                     key: keyId,

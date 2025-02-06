@@ -11,13 +11,13 @@ const createOrderId = async (req, res) => {
       amount: 200,
       currency: "INR",
     });
-    const payment = new Payment.create({
+    const payment = await Payment.create({
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
       status: order.status,
     });
-    res.status(200).json({ ...payment, key: process.env.RAZORPAY_ID });
+    res.status(200).json({ ...payment, keyId: process.env.RAZORPAY_ID });
   } catch (error) {
     console.log(error);
     res.status(500).json({ err: error.message });
